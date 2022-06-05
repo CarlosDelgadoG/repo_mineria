@@ -1,0 +1,90 @@
+---
+title: "Patrones en la sintomatología depresiva de participantes estudio ELSOC"
+subtitle: "Minería de Datos con Python"
+author: "T. Arriaza, C. Delgado, S. Urquizo"
+date: "13 Junio 2022"
+output:
+  xaringan::moon_reader:
+    css: xaringan-themer.css
+---
+
+```{r xaringan-themer, include=FALSE, warning=FALSE}
+library(plotly)
+library(jsonlite)
+knitr::opts_chunk$set(echo = FALSE,
+                      warning = FALSE,
+                      message = FALSE)
+library(xaringanthemer)
+style_mono_accent(
+  base_color = '#21918c',
+  header_font_google = google_font("Josefin Sans"),
+  text_font_google   = google_font("Montserrat", "300", "300i"),
+  code_font_google   = google_font("Fira Mono"),
+  extra_css = list(
+  ".small" = list("font-size" = "75%")))
+```
+
+```{python}
+import pandas as pd
+import numpy as np
+from kmodes.kmodes import KModes
+import matplotlib.pyplot as plt
+import plotly.offline as py
+import plotly.express as px
+import json
+```
+
+```{python}
+phq= pd.read_csv('DATOS\\phq_num.csv',sep=';')
+phq=phq.dropna()
+```
+
+```{python}
+### Seleccionar las variables
+phq_ft=phq.drop(['phq_global','phq_s10','phq_cat'],axis=1)
+### Pasar a categoricas
+def reco_s00(val):
+    if val == 0:
+        return 'Nunca'
+    elif val==1:
+        return 'Algunos'
+    elif val ==2:
+        return 'Varios'
+    elif val ==3:
+        return 'Todos'
+lista_rec=[phq_ft[i].apply(reco_s00) for i in phq_ft.columns]
+
+phq_rec=pd.DataFrame(lista_rec).transpose()
+```
+
+# Visualización Datos
+
+```{python}
+lista=[round(100*phq_rec.value_counts(i)/phq_rec.shape[0],2) for i in phq_rec.columns ]
+```
+
+```{python}
+#Datos para gráfico
+phq_gf=(pd.DataFrame(lista,index= phq_rec.columns).
+ reset_index().
+ rename(columns={'index':'sintoma'}).
+ melt(id_vars='sintoma', 
+      value_vars=['Nunca','Algunos','Todos','Varios']))
+
+```
+
+```{python}
+fig=px.bar(phq_gf,
+       x='sintoma',
+       y='value',
+       color='variable',
+       barmode='group',
+      labels=dict(sintoma='Síntoma',value='Proporción',variable='Frecuencia'),
+      color_discrete_sequence=['#440154','#3b528b','#21918c','#fde725'])
+      
+#py.plot(fig,filename='GRAFICOS/freq-sinto.html',auto_open=False,show_link=False)
+```
+
+<iframe src="GRAFICOS/freq-sinto.html" width="100%" height="400" id="igraph" scrolling="no" seamless="seamless" frameBorder="0"> </iframe>
+
+¿Qué ocurre con el text?
