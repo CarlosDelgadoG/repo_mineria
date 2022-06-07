@@ -60,6 +60,11 @@
   --base: #21918c;
   --white: #FFFFFF;
   --black: #272822;
+  --azul: #3b528b;
+  --morado: #440154;
+  --amarillo: #fde725;
+  --verde: #21918c;
+  --white: #FFFFFF;
 }
 
 html {
@@ -288,6 +293,36 @@ table.dataTable.hover tbody tr:hover, table.dataTable.display tbody tr:hover {
 }
 .bg-black {
   background-color: var(--black);
+}
+.azul {
+  color: var(--azul);
+}
+.bg-azul {
+  background-color: var(--azul);
+}
+.morado {
+  color: var(--morado);
+}
+.bg-morado {
+  background-color: var(--morado);
+}
+.amarillo {
+  color: var(--amarillo);
+}
+.bg-amarillo {
+  background-color: var(--amarillo);
+}
+.verde {
+  color: var(--verde);
+}
+.bg-verde {
+  background-color: var(--verde);
+}
+.white {
+  color: var(--white);
+}
+.bg-white {
+  background-color: var(--white);
 }
 
 

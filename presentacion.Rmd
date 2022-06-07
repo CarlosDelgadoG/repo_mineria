@@ -20,10 +20,25 @@ style_mono_accent(
   text_font_google   = google_font("Montserrat", "300", "300i"),
   code_font_google   = google_font("Fira Mono"),
   extra_css = list(
-  ".small" = list("font-size" = "75%")))
+  ".small" = list("font-size" = "75%")),
+  colors = c(
+  azul = '#3b528b',
+  morado = '#440154',
+  amarillo = '#fde725',
+  verde = '#21918c',
+  white = "#FFFFFF"
+))
 ```
 
-# Visualización datos
+<h1>.morado[Sobre ELSOC]</h1>
+
+---
+
+<h1>.morado[Sobre la escala PHQ-9]</h1>
+
+---
+
+<h1> .morado[Visualización datos] </h1>
 
 <iframe src="GRAFICOS/freq-sinto.html" width="100%" height="400" id="igraph" scrolling="no" seamless="seamless" frameBorder="0"> </iframe>
 
@@ -31,22 +46,34 @@ Esto es una aprueba para ver cómo queda el texto
 
 ---
 
-# Algoritmo K-Modes
+<h1> Algoritmo K-Modes </h1>
 
+Al igual que el algoritmo **.verde[K-means]** busca encontrar observaciones con características similares entre sí, pero distintas entre grupos.
+
+K-modes ocupa las modas de las distintas variables como centro de masa para definir *.verde[similaridad]*
+
+La medida de distancia utilizada es la disimilitud
 ---
 
-# Número óptimo de clusters
+<h1> Número óptimo de clusters </h1>
 
 <iframe src="GRAFICOS/costo_cluster.html" width="100%" height="400" id="igraph" scrolling="no" seamless="seamless" frameBorder="0"> </iframe>
 
 ---
 
-# Proporción clusters
+<h1> Proporción clusters </h1>
 
 <iframe src="GRAFICOS/props_cluster.html" width="100%" height="400" id="igraph" scrolling="no" seamless="seamless" frameBorder="0"> </iframe>
 
 ---
 
-# Proporción de síntomas por cluster
+<h1> .azul[Interpretación de los clusters] </h1>
 
 <iframe src="GRAFICOS/sintomas_por_cluster.html" width="100%" height="400" id="igraph" scrolling="no" seamless="seamless" frameBorder="0"> </iframe>
+
+---
+
+<h1> .azul[Desempeño K-Modes] </h1>
+
+---
+<h1> .amarillo[Comentarios y conclusiones] </h1>
