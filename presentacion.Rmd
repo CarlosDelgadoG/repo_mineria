@@ -35,6 +35,13 @@ style_mono_accent(
 
 <h1>.morado[Sobre ELSOC]</h1>
 
+El .morado[Estudio Longitudinal Social de Chile] **.morado[(ELSOC)]** es una iniciativa del *Centro de Estudios del Conflicto y la Cohesión Social*. Organismo que es patrocinado por distintas universidades.
+
+Es una encuesta longitudinal que sigue al mismo grupo de personas desde el 2016 hasta el 2026. Posee 7 módulos principales de los cuales nos interesa el módulo **.morado[Salud y Bienestar]**.
+
+Nosotros ocuparemos sólo la base del **.morado[2016]** la cual cuenta con 2927 observaciones.
+
+
 ---
 
 <h1>.morado[Sobre la escala PHQ-9]</h1>
@@ -61,7 +68,10 @@ Durante las **.morado[últimas dos semanas]:**
 
 *¿Qué tan seguido ha tenido molestias debido a los siguientes problemas?*
 
-**.morado[Nunca]** **.morado[Algunos]** **.morado[Varios]** **.morado[Todos]**
+* **.morado[Nunca]** 
+* **.morado[Algunos]** 
+* **.morado[Varios]** 
+* **.morado[Todos]**
 ]
 
 ---
@@ -128,12 +138,14 @@ knitr::kable(modas_cl,
 <h1> .azul[Desempeño K-Modes] </h1>
 
 .pull-left[
-Podemos intentar replicar el Indice de **.azul[Davies-Bouldin]** y comparar qué tan cerca están los puntos a su centroide respecto a la distancia entre centroides.
+Podemos comparar la **.azul[distancia promedio al interior]** de cada cluster respecto a su centroide.
+
+Y analizar la **.azul[distancia entre centroides]**.
 
 De este modo:
-* **.azul[C0C1:]** 0.78
-* **.azul[C0C2:]** 0.75
-* **.azul[C1C2:]** 1.14
+* **.azul[C0C1:]** 6
+* **.azul[C0C2:]** 8
+* **.azul[C1C2:]** 6
 ]
 
 .pull-right[
@@ -156,3 +168,7 @@ d_12 <- round((2.78+4.09)/6,2)
 
 ---
 <h1> .amarillo[Comentarios y conclusiones] </h1>
+
+* Algoritmo **.verde[K-Modes]** no incopora la noción de orden en las categorías.
+* No hay buena literatura sobre el **.azul[desempeño]** del algortimo **.verde[K-Modes]**.
+* No es claro cómo determinar un número óptimo de clusters teniendo en cuenta la **.amarillo[replicabilidad]** de los clusters respecto a otras muestras.
