@@ -12,6 +12,7 @@ output:
 library(xaringanthemer)
 library(tidyverse)
 library(kableExtra)
+options(knitr.table.format = "html") 
 knitr::opts_chunk$set(echo = FALSE,
                       warning = FALSE,
                       message = FALSE)
@@ -37,6 +38,31 @@ style_mono_accent(
 ---
 
 <h1>.morado[Sobre la escala PHQ-9]</h1>
+.pull-left[
+
+```{r}
+tibble('Sintoma'=  c('Poco interés', 'Decaído(a)',
+                     'Dificultad de sueño','Con poca energía',
+                     'Problemas de apetito','Se ha sentido mal consigo mismo',
+                     'Dificultad concentración',
+                     'Muy lento o demasiado agitado',
+                     'Ideación suicida'),
+        'Código'=c('s01','s02','s03',
+                    's04','s05','s06',
+                    's07','s08','s09'))%>%knitr::kable(align = 'lc',
+                                                       format = 'html',
+                                                       full_width=FALSE,
+                                                       font_size=9)
+```
+
+]
+.pull-right[
+Durante las **.morado[últimas dos semanas]:** 
+
+*¿Qué tan seguido ha tenido molestias debido a los siguientes problemas?*
+
+**.morado[Nunca]** **.morado[Algunos]** **.morado[Varios]** **.morado[Todos]**
+]
 
 ---
 
