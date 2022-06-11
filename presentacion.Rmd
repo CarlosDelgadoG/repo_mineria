@@ -120,7 +120,7 @@ Los centroides corresponden a la **.verde[moda]** de cada columna dentro de un c
 .pull-right[
 
 ```{r}
-modas_cl <- read_csv("DATOS/modas_cl.csv")%>%select(-'...1')
+modas_cl <- read_csv("DATOS/modas_cl.csv")%>%select(-1)
 knitr::kable(modas_cl,
        format = 'html')
 ```
