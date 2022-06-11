@@ -33,6 +33,13 @@ style_mono_accent(
 ))
 ```
 
+<h1>.morado[¿Para qué estudiar la sintomatología depresiva?]</h1>
+
+La depresión es un problema de Salud Pública en el mundo. En Chile la ENS estima que  la prevalencia de la **.morado[sospecha de depresión]**  llega a un un **.morado[15.8%]** en la población general.
+
+
+
+---
 <h1>.morado[Sobre ELSOC]</h1>
 
 El .morado[Estudio Longitudinal Social de Chile] **.morado[(ELSOC)]** es una iniciativa del *Centro de Estudios del Conflicto y la Cohesión Social*. Organismo que es patrocinado por distintas universidades.
