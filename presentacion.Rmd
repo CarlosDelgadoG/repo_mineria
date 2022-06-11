@@ -39,15 +39,6 @@ La depresión es un problema de Salud Pública en el mundo. En Chile la ENS esti
 
 
 
----
-<h1>.morado[Sobre ELSOC]</h1>
-
-El .morado[Estudio Longitudinal Social de Chile] **.morado[(ELSOC)]** es una iniciativa del *Centro de Estudios del Conflicto y la Cohesión Social*. Organismo que es patrocinado por distintas universidades.
-
-Es una encuesta longitudinal que busca ser representativa de la **.morado[población urbana]** y sigue al mismo grupo de personas desde el 2016 hasta el 2026. Posee 7 módulos principales de los cuales nos interesa el módulo **.morado[Salud y Bienestar]**.
-
-Nosotros ocuparemos sólo la base del **.morado[2016]** la cual cuenta con 2927 observaciones.
-
 
 ---
 
@@ -80,26 +71,46 @@ Durante las **.morado[últimas dos semanas]:**
 * **.morado[Varios]** 
 * **.morado[Todos]**
 ]
+---
+
+<h1>.morado[Sobre ELSOC]</h1>
+
+El .morado[Estudio Longitudinal Social de Chile] **.morado[(ELSOC)]** es una iniciativa del *Centro de Estudios del Conflicto y la Cohesión Social*. Organismo que es patrocinado por distintas universidades.
+
+Es una encuesta longitudinal que busca ser representativa de la **.morado[población urbana]** y sigue al mismo grupo de personas desde el 2016 hasta el 2026. Posee 7 módulos principales de los cuales nos interesa el módulo **.morado[Salud y Bienestar]**.
+
+Nosotros ocuparemos sólo la base del **.morado[2016]** la cual cuenta con 2927 observaciones.
+
 
 ---
 
-<h1> .morado[Visualización datos] </h1>
+<h1> .morado[Frecuencias relativas PHQ-9] </h1>
 
 <iframe src="GRAFICOS/freq-sinto.html" width="100%" height="400" id="igraph" scrolling="no" seamless="seamless" frameBorder="0"> </iframe>
 
-Frecuencia relativa de los síntomas según **.morado[intesidad]** del síntoma.
+Para el año 2016 de la muestra del estudio ELSOC.
+
+---
+
+<h1> .morado[Patrones de intesidad en la PHQ-9] </h1>
+
+Las metodologías No Supervisadas nos permiten identificar grupos dentro de nuestros datos.
+
+El algortimo más popular de clustering **.morado[K-means]**, puede ser adaptado para datos categóricos.
+
+Poder identificar grupos en la intensidad de los síntomas de la escala PHQ-9 podría favorecer la prevención de este tipo de trastornos. Puede ser el punto de partida para análisis preventivos de sub-poblaciones en mayor riesgo de depresión u otros trastornos.
 
 ---
 
 <h1> Algoritmo K-Modes </h1>
 
-Al igual que el algoritmo **.verde[K-means]** busca encontrar observaciones con características similares entre sí, pero distintas entre grupos.
+Permite identificar grupos de observaciones con características similares entre sí, pero distintas entre grupos.
 
 **.verde[K-modes]** ocupa las modas de las distintas variables como centro de masa para definir **.verde[similaridad]**.
 
-A partir de **.verde[k-modas iniciales]**, se ubica la observación al cluster más cercano según la medida de **.verde[disimiltud]**. Podemos definir la función $d_{sim}(x,y)$, que toma dos vectores de p dimensiones y suma los componentes donde tengan el mismo valor. 
+A partir de **.verde[k-modas iniciales]**, se ubica la observación al cluster más cercano según la medida de **.verde[disimiltud]**. Esta función la definimos como $d_{sim}(x,y)$, la que toma dos vectores de p dimensiones y cuenta el número de componentes de distinto valor. 
 
-La **.verde[función de pérdida]** es la suma total de la disimilitud de las observaciones respecto a su centroide asignado:
+Dado un número **k** de clusters, definimos como **.verde[función de pérdida]** a la suma total de la disimilitud de las observaciones respecto a su centroide asignado:
 
 $$\sum^{k}_{j=1}\sum^{m_j}_{i=1}\text{d}_{sim}(x_{ij},c_j)$$
 
@@ -109,14 +120,7 @@ $$\sum^{k}_{j=1}\sum^{m_j}_{i=1}\text{d}_{sim}(x_{ij},c_j)$$
 
 <iframe src="GRAFICOS/costo_cluster.html" width="100%" height="400" id="igraph" scrolling="no" seamless="seamless" frameBorder="0"> </iframe>
 
----
-
-<h1> Proporción clusters </h1>
-
-<iframe src="GRAFICOS/props_cluster.html" width="100%" height="400" id="igraph" scrolling="no" seamless="seamless" frameBorder="0"> </iframe>
-
-
-
+Escogemos **tres** clusters como el número óptimo.
 ---
 <h1> Centroides clusters </h1>
 
@@ -136,7 +140,14 @@ knitr::kable(modas_cl,
 
 ---
 
-<h1> .azul[Interpretación de los clusters] </h1>
+<h1> Distribución de los clusters </h1>
+
+<iframe src="GRAFICOS/props_cluster.html" width="100%" height="400" id="igraph" scrolling="no" seamless="seamless" frameBorder="0"> </iframe>
+
+Para el año 2016 de la muestra ELSOC (de un total de 2888 observaciones)
+---
+
+<h1> .azul[Sintomatología según cluster] </h1>
 
 <iframe src="GRAFICOS/sintomas_por_cluster.html" width="100%" height="400" id="igraph" scrolling="no" seamless="seamless" frameBorder="0"> </iframe>
 
@@ -145,17 +156,7 @@ knitr::kable(modas_cl,
 <h1> .azul[Desempeño K-Modes] </h1>
 
 .pull-left[
-Podemos comparar la **.azul[distancia promedio al interior]** de cada cluster respecto a su centroide.
-
-Y analizar la **.azul[distancia entre centroides]**.
-
-De este modo:
-* **.azul[C0C1:]** 6
-* **.azul[C0C2:]** 8
-* **.azul[C1C2:]** 6
-]
-
-.pull-right[
+Podemos comparar la **.azul[disimilitud promedio al interior]** de cada cluster respecto a su centroide:
 ```{r}
 knitr::kable(tibble('Cluster'=c(0,1,2),
        'Dist dentro'=c(1.91,2.78,4.09)),
@@ -169,7 +170,14 @@ d_02 <- round((1.91+4.09)/8,2)
 d_12 <- round((2.78+4.09)/6,2)
 ```
 
+]
 
+.pull-right[
+
+Y analizar la **.azul[distancia entre centroides]**:
+* **.azul[C0C1:]** 6
+* **.azul[C0C2:]** 8
+* **.azul[C1C2:]** 6
 
 ]
 
