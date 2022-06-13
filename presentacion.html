@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Patrones en la sintomatología depresiva de participantes estudio ELSOC</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="T. Arriaza, C. Delgado, S. Urquizo" />
+    <script src="presentacion_files/header-attrs-2.14/header-attrs.js"></script>
+    <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+.title[
+# Patrones en la sintomatología depresiva de participantes estudio ELSOC
+]
+.subtitle[
+## Minería de Datos con Python
+]
+.author[
+### T. Arriaza, C. Delgado, S. Urquizo
+]
+.date[
+### 13 Junio 2022
+]
+
+---
+
+
+
+
+&lt;h1&gt;.morado[¿Para qué estudiar la sintomatología depresiva?]&lt;/h1&gt;
+
+La depresión es un problema de Salud Pública en el mundo. En Chile la ENS estima que  la prevalencia de la **.morado[sospecha de depresión]**  llega a un un **.morado[15.8%]** en la población general.
+
+Hablar de **.morado[sintomatología depresiva]** nos permite poner énfasis en un malestar que todos llevamos con diferente **.morado[intensidad]**.
+
+Cabe la pregunta sí existen **.morado[patrones]** entre personas diferentes respecto al grado con que experimentan síntomas que caracterizan un episodio depresivo mayor. 
+
+---
+
+&lt;h1&gt;.morado[Sobre la escala PHQ-9]&lt;/h1&gt;
+.pull-left[
+
+&lt;table&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;"&gt; Sintoma &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; Código &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Poco interés &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; s01 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Decaído(a) &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; s02 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Dificultad de sueño &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; s03 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Con poca energía &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; s04 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Problemas de apetito &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; s05 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Se ha sentido mal consigo mismo &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; s06 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Dificultad concentración &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; s07 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Muy lento o demasiado agitado &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; s08 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Ideación suicida &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; s09 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+]
+.pull-right[
+Durante las **.morado[últimas dos semanas]:** 
+
+.center[*¿Qué tan seguido ha tenido molestias debido a los siguientes problemas?*]
+
+* **.morado[Nunca]** 
+* **.morado[Algunos]** 
+* **.morado[Varios]** 
+* **.morado[Todos]**
+]
+---
+
+&lt;h1&gt;.morado[Sobre ELSOC]&lt;/h1&gt;
+
+El .morado[Estudio Longitudinal Social de Chile] **.morado[(ELSOC)]** es una iniciativa del *Centro de Estudios del Conflicto y la Cohesión Social*. Organismo que es patrocinado por distintas universidades.
+
+Es una encuesta longitudinal que busca ser representativa de la **.morado[población urbana]** y sigue al mismo grupo de personas desde el 2016 hasta el 2026. 
+
+Uno de sus módulos principales es **.morado[Salud y Bienestar]**, contiene el cuestionario **.morado[PHQ-9]**, y ha sido aplicado año tras año.
+
+Nosotros ocuparemos sólo la base del **.morado[2016]** la cual cuenta con 2927 observaciones.
+
+
+---
+
+&lt;h1&gt; .morado[Frecuencias relativas PHQ-9] &lt;/h1&gt;
+
+&lt;iframe src="GRAFICOS/freq-sinto.html" width="100%" height="400" id="igraph" scrolling="no" seamless="seamless" frameBorder="0"&gt; &lt;/iframe&gt;
+
+.center[Para el año 2016 de la muestra del estudio ELSOC]
+
+---
+
+&lt;h1&gt; .morado[Patrones de intesidad en la PHQ-9] &lt;/h1&gt;
+
+Las metodologías **.morado[No Supervisadas]** nos permiten identificar grupos dentro de nuestros datos.
+
+El algortimo más popular de clustering **.morado[K-means]** puede ser adaptado para datos categóricos.
+
+Poder identificar grupos en la intensidad de los síntomas de la escala PHQ-9 podría favorecer la prevención de este tipo de trastornos. Puede ser el punto de partida para análisis preventivos de sub-poblaciones en mayor riesgo de depresión u otros trastornos.
+
+---
+
+&lt;h1&gt; Algoritmo K-Modes &lt;/h1&gt;
+
+Permite identificar grupos de observaciones con características similares entre sí, pero distintas entre grupos.
+
+**.verde[K-modes]** ocupa las modas de las distintas variables como centro de masa para definir **.verde[similaridad]**.
+
+A partir de **.verde[k modas iniciales]** asignamos una observación al cluster más cercano según la medida de **.verde[disimiltud]**. Esta función la definimos como `\(d_{sim}(x,y)\)`, la que toma dos vectores de p dimensiones y cuenta el número de componentes con valores distintos. 
+
+Dado un número **k** de clusters, definimos como **.verde[función de pérdida]** a la suma total de la disimilitud de las observaciones respecto a su centroide asignado:
+
+`$$\sum^{k}_{j=1}\sum^{m_j}_{i=1}\text{d}_{sim}(x_{ij},c_j)$$`
+
+---
+
+&lt;h1&gt; Número óptimo de clusters &lt;/h1&gt;
+
+&lt;iframe src="GRAFICOS/costo_cluster.html" width="100%" height="400" id="igraph" scrolling="no" seamless="seamless" frameBorder="0"&gt; &lt;/iframe&gt;
+.center[Escogemos **tres** clusters como el número óptimo]
+---
+&lt;h1&gt; Centroides clusters &lt;/h1&gt;
+
+.pull-left[
+.center[ Los centroides corresponden a la **.verde[moda]** de cada columna dentro de un cluster]
+]
+
+.pull-right[
+
+&lt;table&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;"&gt; Cluster &lt;/th&gt;
+   &lt;th style="text-align:left;"&gt; 0 &lt;/th&gt;
+   &lt;th style="text-align:left;"&gt; 1 &lt;/th&gt;
+   &lt;th style="text-align:left;"&gt; 2 &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; s01 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Nunca &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Algunos &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Algunos &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; s02 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Nunca &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Algunos &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Algunos &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; s03 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Nunca &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Algunos &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Todos &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; s04 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Nunca &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Algunos &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Todos &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; s05 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Nunca &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Algunos &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Todos &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; s06 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Nunca &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Algunos &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Todos &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; s07 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Nunca &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Nunca &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Algunos &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; s08 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Nunca &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Nunca &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Algunos &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; s09 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Nunca &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Nunca &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Nunca &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+]
+
+---
+
+&lt;h1&gt; Distribución de los clusters &lt;/h1&gt;
+
+&lt;iframe src="GRAFICOS/props_cluster.html" width="100%" height="400" id="igraph" scrolling="no" seamless="seamless" frameBorder="0"&gt; &lt;/iframe&gt;
+
+.center[Para el año 2016 de la muestra ELSOC (de un total de 2888 observaciones)]
+---
+
+&lt;h1&gt; .azul[Sintomatología según cluster] &lt;/h1&gt;
+
+&lt;iframe src="GRAFICOS/sintomas_por_cluster.html" width="100%" height="400" id="igraph" scrolling="no" seamless="seamless" frameBorder="0"&gt; &lt;/iframe&gt;
+
+---
+&lt;h1&gt; .azul[Sospecha EDM según cluster] &lt;/h1&gt;
+
+&lt;iframe src="GRAFICOS/sospecha_edm_por_cluster.html" width="100%" height="400" id="igraph" scrolling="no" seamless="seamless" frameBorder="0"&gt; &lt;/iframe&gt;
+
+.center[Puntajes de la escala PHQ-9 mayores o iguales a 10 sirven para identificar **.azul[sospecha de un episodio depresivo mayor]**]
+---
+
+&lt;h1&gt; .azul[Desempeño K-Modes] &lt;/h1&gt;
+
+.pull-left[
+Podemos comparar la **.azul[disimilitud promedio al interior]** de cada cluster respecto a su centroide:
+&lt;table&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:right;"&gt; Cluster &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; Dist dentro &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1.91 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 2.78 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 2 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 4.09 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+
+
+]
+
+.pull-right[
+
+Y analizar la **.azul[distancia entre centroides]**:
+* **.azul[C0C1:]** 6
+* **.azul[C0C2:]** 8
+* **.azul[C1C2:]** 6
+
+]
+
+---
+&lt;h1&gt; .amarillo[Comentarios y conclusiones] &lt;/h1&gt;
+
+* Algoritmo **.verde[K-Modes]** no incopora la noción de orden en las categorías.
+
+* No hay buena literatura sobre el **.azul[desempeño]** del algortimo **.azul[K-Modes]**.
+
+* No es claro cómo determinar un número óptimo de clusters teniendo en cuenta la **.amarillo[replicabilidad]** de los clusters respecto a otras muestras.
+
+* Puede ser un primer paso para ocupar modelos de **.morado[transición]** en el tiempo de una categoría a otra.
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create();
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

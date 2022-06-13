@@ -154,6 +154,12 @@ knitr::kable(modas_cl,
 <iframe src="GRAFICOS/sintomas_por_cluster.html" width="100%" height="400" id="igraph" scrolling="no" seamless="seamless" frameBorder="0"> </iframe>
 
 ---
+<h1> .azul[Sospecha EDM según cluster] </h1>
+
+<iframe src="GRAFICOS/sospecha_edm_por_cluster.html" width="100%" height="400" id="igraph" scrolling="no" seamless="seamless" frameBorder="0"> </iframe>
+
+.center[Puntajes de la escala PHQ-9 mayores o iguales a 10 sirven para identificar **.azul[sospecha de un episodio depresivo mayor]**]
+---
 
 <h1> .azul[Desempeño K-Modes] </h1>
 
@@ -188,6 +194,8 @@ Y analizar la **.azul[distancia entre centroides]**:
 
 * Algoritmo **.verde[K-Modes]** no incopora la noción de orden en las categorías.
 
-* No hay buena literatura sobre el **.azul[desempeño]** del algortimo **.verde[K-Modes]**.
+* No hay buena literatura sobre el **.azul[desempeño]** del algortimo **.azul[K-Modes]**.
 
 * No es claro cómo determinar un número óptimo de clusters teniendo en cuenta la **.amarillo[replicabilidad]** de los clusters respecto a otras muestras.
+
+* Puede ser un primer paso para ocupar modelos de **.morado[transición]** en el tiempo de una categoría a otra.
